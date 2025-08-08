@@ -55,6 +55,9 @@ s3 = [
   '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
   echo Day $n
   cargo solve $n
+  printf "Record? [y/N]"
+  read -r ans
+  [[ -z $ans || $ans == [Nn]* ]] && return
   cargo time $n'''
 ]
 
@@ -62,7 +65,8 @@ t = [
   "exec",
   "SHELL=zsh",
   "-s",
-  '''n=$1
+  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
+  echo Day $n
   [[ $2 == 2 ]] && part=part_two || part=part_one
   cargo test --bin ${(l:2::0:)n} $part -- --no-capture'''
 ]

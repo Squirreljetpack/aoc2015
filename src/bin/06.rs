@@ -1,7 +1,6 @@
-use itertools::Itertools;
-
 advent_of_code::solution!(6);
 // use std::simd::{Simd};
+// cargo rustc --release -- --emit=asm -C target-cpu=native
 
 fn parse_coords(s: &str) -> Option<((u32, u32), (u32, u32))> {
     let (a, b) = s.split_once(" through ")?;
