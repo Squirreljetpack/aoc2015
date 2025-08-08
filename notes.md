@@ -26,3 +26,4 @@
 
 - https://adventofcode.com/2015
 - https://github.com/ByteAtATime/aoc2024
+- https://github.com/narimiran/advent_of_code_2015/tree/master/python
