@@ -17,7 +17,7 @@ start = [
   "-sr",
   '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#complete ]]; do ((n++)); done; fi;
   echo Day $n;
-  src=src/bin/${(l:2::0:)n}.rs; [[ ! -e $src ]] && cargo scaffold $n --download; cargo read $n | $PAGER && code . $src'''
+  src=src/bin/${(l:2::0:)n}.rs; [[ ! -e $src ]] && cargo scaffold $n --download; cargo read $n | $PAGER && code -a . $src'''
 ]
 
 submit1 = [
@@ -46,6 +46,25 @@ refresh = [
   "-s",
   '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#complete ]]; do ((n++)); done; fi;
   cargo download $n &'''
+]
+
+s3 = [
+  "exec",
+  "SHELL=zsh",
+  "-s",
+  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#complete ]]; do ((n++)); done; fi;
+  echo Day $n
+  cargo solve $n
+  cargo time $n'''
+]
+
+t = [
+  "exec",
+  "SHELL=zsh",
+  "-s",
+  '''n=$1
+  [[ $2 == 2 ]] && part=part_two || part=part_one
+  cargo test --bin ${(l:2::0:)n} $part -- --no-capture'''
 ]
 
 [env]
