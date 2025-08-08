@@ -15,16 +15,16 @@ start = [
   "exec",
   "SHELL=zsh",
   "-sr",
-  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#complete ]]; do ((n++)); done; fi;
+  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
   echo Day $n;
-  src=src/bin/${(l:2::0:)n}.rs; [[ ! -e $src ]] && cargo scaffold $n --download; cargo read $n | $PAGER && code -a . $src'''
+  src=src/bin/${(l:2::0:)n}.rs; [[ ! -e $src ]] && cargo scaffold $n --download; cargo read $n | $PAGER && code -a . $src data/puzzles/${(l:2::0:)n}.md'''
 ]
 
 submit1 = [
   "exec",
   "SHELL=zsh",
   "-s",
-  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#complete ]]; do ((n++)); done; fi;
+  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
   echo Day $n
   cargo solve $n --submit 1 | tee /dev/tty | grep "right answer!" &&
   cargo download $n && cargo start $n &> /dev/null'''
@@ -34,7 +34,7 @@ submit2 = [
   "exec",
   "SHELL=zsh",
   "-s",
-  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#complete ]]; do ((n++)); done; fi;
+  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
   echo Day $n
   cargo solve $n --submit 2 | tee /dev/tty | grep "right answer!" &&
   ex -sc '$d|x' data/puzzles/${(l:2::0:)n}.md && echo \#complete >> data/puzzles/${(l:2::0:)n}.md && cargo start'''
@@ -44,7 +44,7 @@ refresh = [
   "exec",
   "SHELL=zsh",
   "-s",
-  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#complete ]]; do ((n++)); done; fi;
+  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
   cargo download $n &'''
 ]
 
@@ -52,7 +52,7 @@ s3 = [
   "exec",
   "SHELL=zsh",
   "-s",
-  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#complete ]]; do ((n++)); done; fi;
+  '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
   echo Day $n
   cargo solve $n
   cargo time $n'''
