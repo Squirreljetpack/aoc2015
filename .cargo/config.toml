@@ -8,8 +8,10 @@ all = "run --quiet --release -- all"
 time = "run --quiet --release -- time --store"
 
 "s" = "start"
-"s1" = "submit1"
-"s2" = "submit2"
+"s1" = "submit_p1"
+"s2" = "submit_p2"
+"s3" = "solve_n"
+"t" = "test_n"
 
 start = [
   "exec",
@@ -20,7 +22,7 @@ start = [
   src=src/bin/${(l:2::0:)n}.rs; [[ ! -e $src ]] && cargo scaffold $n --download; cargo read $n | $PAGER && code -a . $src data/puzzles/${(l:2::0:)n}.md'''
 ]
 
-submit1 = [
+submit_p1 = [
   "exec",
   "SHELL=zsh",
   "-s",
@@ -30,7 +32,7 @@ submit1 = [
   cargo download $n && cargo start $n &> /dev/null'''
 ]
 
-submit2 = [
+submit_p2 = [
   "exec",
   "SHELL=zsh",
   "-s",
@@ -48,7 +50,7 @@ refresh = [
   cargo download $n &'''
 ]
 
-s3 = [
+solve_n = [
   "exec",
   "SHELL=zsh",
   "-s",
@@ -61,7 +63,7 @@ s3 = [
   cargo time $n'''
 ]
 
-t = [
+test_n = [
   "exec",
   "SHELL=zsh",
   "-s",
