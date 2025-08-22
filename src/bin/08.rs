@@ -1,3 +1,4 @@
+#![allow(unused_variables)]
 advent_of_code::solution!(8);
 
 pub fn part_one(input: &str) -> Option<u64> {

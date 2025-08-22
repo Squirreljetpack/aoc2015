@@ -90,7 +90,7 @@ fn step(x: u32, y: u32, z: bool, d: &mut VecDeque<BitVec>) {
 }
 
 pub fn part_two(input: &str) -> Option<u64> {
-    eprintln!("-----");
+    // eprintln!("-----");
     let (mut x, mut y, mut z): (u32, u32, bool) = (0, 128, false);
     let (mut a, mut b, mut c): (u32, u32, bool) = (0, 128, false);
     let mut d = VecDeque::new();

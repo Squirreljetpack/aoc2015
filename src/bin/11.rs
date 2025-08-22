@@ -1,6 +1,6 @@
 #![allow(unused_variables)]
 
-advent_of_code::solution!(%DAY_NUMBER%);
+advent_of_code::solution!(11);
 
 pub fn part_one(input: &str) -> Option<u64> {
     None

@@ -7,11 +7,11 @@ solve = "run --quiet --release -- solve"
 all = "run --quiet --release -- all"
 time = "run --quiet --release -- time --store"
 
-"s" = "start"
-"s1" = "submit_p1"
-"s2" = "submit_p2"
-"s3" = "solve_n"
-"t" = "test_n"
+"@s" = "start"
+"@s1" = "submit_p1"
+"@s2" = "submit_p2"
+"@s3" = "solve_n"
+"@t" = "test_n"
 
 start = [
   "exec",
@@ -42,12 +42,12 @@ submit_p2 = [
   ex -sc '$d|x' data/puzzles/${(l:2::0:)n}.md && echo \#complete >> data/puzzles/${(l:2::0:)n}.md && cargo start'''
 ]
 
-refresh = [
+"@refresh" = [
   "exec",
   "SHELL=zsh",
   "-s",
   '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
-  cargo download $n &'''
+  { cargo download $n; code -a data/puzzles/${(l:2::0:)n}.md; }&'''
 ]
 
 solve_n = [
@@ -75,3 +75,6 @@ test_n = [
 
 [env]
 AOC_YEAR = "2015"
+
+# [build]
+# rustflags = ["-L", "/opt/homebrew/lib"]
