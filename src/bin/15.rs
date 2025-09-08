@@ -145,7 +145,7 @@ pub fn find_invertible_partition(
         }
     }
     
-    bail!("Could not find a valid permutation of columns such that m_e is invertible")
+    bail!("Could not find a invertible submatrix")
 }
 
 
@@ -387,7 +387,6 @@ pub fn solve(a: &DMatrix<f64>, c: f64) -> Result<(Vec<i64>, f64), Error> {
     // Print result
     debug_eprintln!("{res}");
     
-    // why doesn't bail work here in place of anyhow?
     let relaxed_best = res.state().get_best_param().ok_or_else(|| anyhow!("missing val"))?;
     
     let recovered_relaxed_best = recover_full_vec(relaxed_best, &xe_linear, &xe_affine, &left_split);
@@ -460,7 +459,6 @@ pub fn solve2(a: &DMatrix<f64>, calories: &RowDVector<f64>, c: f64) -> Result<(V
         .collect::<Vec<_>>()
     );
     
-    // b vector
     let b_stacked = DVector::from_iterator(
         m + n + 1,
         a_rem.iter().copied().map(|v| v -1.0)
@@ -496,7 +494,7 @@ pub fn solve2(a: &DMatrix<f64>, calories: &RowDVector<f64>, c: f64) -> Result<(V
     // Print result
     debug_eprintln!("{res}");
     
-    // why doesn't bail work here in place of anyhow?
+    // how does anyhow work anyhow?
     let relaxed_best = res.state().get_best_param().ok_or_else(|| anyhow!("missing val"))?;
     
     // could be improved by fuzzing over the reduced vector but its cleaner this way

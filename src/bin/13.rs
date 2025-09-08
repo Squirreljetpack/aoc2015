@@ -1,5 +1,3 @@
-#![allow(unused_variables)]
-
 use std::collections::HashMap;
 
 use good_lp::{solvers::coin_cbc::{CoinCbcProblem, CoinCbcSolution}, *};
@@ -122,6 +120,7 @@ pub fn is_tsp_solved(problem: &mut CoinCbcProblem, solution: &CoinCbcSolution, v
         dbg!(solution.value(vars[[curr,max_idx]]));
         
         curr = max_idx;
+        // every node belongs to a cycle
         if max_idx == cycle_idx[0] {
             break
         } else {

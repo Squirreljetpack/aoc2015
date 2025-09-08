@@ -1,4 +1,4 @@
-#![allow(unused_variables)]
+
 
 advent_of_code::solution!(12);
 
@@ -22,7 +22,7 @@ impl<'de> Deserialize<'de> for SumNumbers {
                 write!(f, "any JSON structure containing numbers")
             }
 
-            fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
+            fn visit_str<E>(self, _v: &str) -> Result<Self::Value, E>
             where
                 E: de::Error,
             {

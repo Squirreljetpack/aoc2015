@@ -1,6 +1,14 @@
-#![allow(unused_variables)]
+#![allow(unused_variables, unused_macros)]
 
-advent_of_code::solution!(11);
+advent_of_code::solution!(18);
+
+macro_rules! debug_eprintln {
+    ($($arg:tt)*) => {
+        if cfg!(debug_assertions) {
+            eprintln!($($arg)*);
+        }
+    };
+}
 
 pub fn part_one(input: &str) -> Option<u64> {
     None

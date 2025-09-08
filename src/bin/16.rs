@@ -1,4 +1,4 @@
-#![allow(unused_variables)]
+
 
 advent_of_code::solution!(16);
 

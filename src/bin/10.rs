@@ -1,4 +1,4 @@
-#![allow(unused_variables)]
+
 
 advent_of_code::solution!(10);
 
@@ -32,7 +32,7 @@ pub fn part_one(input: &str) -> Option<u64> {
         .map(|c| c.to_digit(10).map(|d| d as u8))
         .collect::<Option<Vec<u8>>>()?;
 
-    for n in 0..40 {
+    for _ in 0..40 {
         digits = lookandsay(digits);
     }
 
@@ -45,7 +45,7 @@ pub fn part_two(input: &str) -> Option<u64> {
         .map(|c| c.to_digit(10).map(|d| d as u8))
         .collect::<Option<Vec<u8>>>()?;
 
-    for n in 0..50 {
+    for _ in 0..50 {
         digits = lookandsay(digits);
     }
 
