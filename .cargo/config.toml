@@ -11,6 +11,7 @@ time = "run --quiet --release -- time --store"
 "@s1" = "submit_p1"
 "@s2" = "submit_p2"
 "@s3" = "solve_n"
+"@r" = "solve_n"
 "@t" = "test_n"
 
 start = [
@@ -28,7 +29,7 @@ submit_p1 = [
   "-s",
   '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
   echo Day $n
-  cargo solve $n --submit 1 | tee /dev/tty | grep "right answer!" &&
+  cargo solve $n --submit 1 | tee /dev/tty | grep -q "right answer!" &&
   cargo download $n && cargo start $n &> /dev/null'''
 ]
 
@@ -38,7 +39,7 @@ submit_p2 = [
   "-s",
   '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
   echo Day $n
-  cargo solve $n --submit 2 | tee /dev/tty | grep "right answer!" &&
+  cargo solve $n --submit 2 | tee /dev/tty | grep -q "right answer!" &&
   ex -sc '$d|x' data/puzzles/${(l:2::0:)n}.md && echo \#complete >> data/puzzles/${(l:2::0:)n}.md && cargo start'''
 ]
 
@@ -57,9 +58,9 @@ solve_n = [
   '''n=$1; if ! ((n)); then n=1; while [[ -e data/puzzles/${(l:2::0:)n}.md && "$(tail -n 1 data/puzzles/${(l:2::0:)n}.md)" == \#* ]]; do ((n++)); done; fi;
   echo Day $n
   cargo solve $n
-  printf "Record? [y/N]"
+  printf "Record? [y/N] "
   read -r ans
-  [[ -z $ans || $ans == [Nn]* ]] && return
+  [[ -z $ans || $ans != [Yy]* ]] && return
   cargo time $n'''
 ]
 

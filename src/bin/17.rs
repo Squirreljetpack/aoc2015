@@ -1,14 +1,6 @@
 #![allow(unused_variables)]
 
-advent_of_code::solution!(%DAY_NUMBER%);
-
-macro_rules! debug_eprintln {
-    ($($arg:tt)*) => {
-        if cfg!(debug_assertions) {
-            eprintln!($($arg)*);
-        }
-    };
-}
+advent_of_code::solution!(17);
 
 pub fn part_one(input: &str) -> Option<u64> {
     None

@@ -2,6 +2,7 @@
 
 advent_of_code::solution!(10);
 
+// also, itertools.group_by
 pub fn lookandsay(digits: Vec<u8>) -> Vec<u8> {
     let mut it = digits.into_iter();
     let mut cn = it.next().unwrap();
